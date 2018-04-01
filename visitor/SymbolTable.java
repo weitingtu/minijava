@@ -265,17 +265,14 @@ class Class
 
     // Add a field
     // Return false if there is a name conflict (among all fields only)
-    //public boolean addVar( String id, int idRef, Type type )
     public boolean addVar( Identifier id, int idRef, Type type )
     {
-        //if ( fields.containsKey( id ) )
         if ( fields.containsKey( id.s ) )
         {
             return false;
         }
         else
         {
-            //fields.put( id, new Variable( id, idRef, type ) );
             fields.put( id.s, new Variable( id, idRef, type ) );
             return true;
         }
@@ -314,12 +311,10 @@ class Class
 class Variable
 {
 
-    //String id;
     Identifier id;
     int idRef;
     Type type;
 
-    //public Variable( String id, int idRef, Type type )
     public Variable( Identifier id, int idRef, Type type )
     {
         this.id = id;
@@ -364,10 +359,8 @@ class Method
 
     // Add a formal parameter
     // Return false if there is a name conflict
-    //public boolean addParam( String id, int idRef, Type type )
     public boolean addParam( Identifier id, int idRef, Type type )
     {
-        //if ( containsParam( id ) )
         if ( containsParam( id.s ) )
         {
             return false;
@@ -399,17 +392,14 @@ class Method
 
     // Add a local variable
     // Return false if there is a name conflict
-    //public boolean addVar( String id, int idRef, Type type )
     public boolean addVar( Identifier id, int idRef, Type type )
     {
-        //if ( vars.containsKey( id ) )
         if ( vars.containsKey( id.s ) )
         {
             return false;
         }
         else
         {
-            //vars.put( id, new Variable( id, idRef, type ) );
             vars.put( id.s, new Variable( id, idRef, type ) );
             return true;
         }
