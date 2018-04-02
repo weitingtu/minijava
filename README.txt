@@ -15,7 +15,9 @@ Type check
 - Assigning an object X to a variable of type Y but X is not an instance of Y
 
 - Comparing a boolean value to an int value
-  LessThan
-  legal: 
-  (int, double), (int, double) 
 
+Rules when int is mixed with double
+
+- When an operand to a binary operator is of type int and the other operand is of type double, then the operand of type int should be promoted to an equivalent value of type double.
+
+- When a value is of type int but type double is expected, the value of type int can be safely promoted to an equivalent value of type double. (e.g., assigning int value to a double variable)
