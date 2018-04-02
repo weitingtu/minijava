@@ -42,6 +42,10 @@ test1:
 test2:
 	java Main < input/BinarySearch.java
 
+test3:
+	java Main < input/LessThanIfBooleanInt.java || (echo "Catched"; )
+	java Main < input/LessThanIfDoubleInt.java && (echo "Passed"; )
+
 pretty_test1:
 	java Main2 < input/Factorial.java
 

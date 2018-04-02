@@ -195,6 +195,32 @@ public class TypeCheckVisitor extends DepthFirstVisitor
             System.exit( -1 );
         }
     }
+
+    private String getTypeString( Type t )
+    {
+        if ( t instanceof IntArrayType )
+        {
+            return "int []";
+        }
+        if ( t instanceof BooleanType )
+        {
+            return "boolean";
+        }
+        if ( t instanceof IntegerType )
+        {
+            return "int";
+        }
+        if ( t instanceof DoubleType )
+        {
+            return "double";
+        }
+        if ( t instanceof IdentifierType )
+        {
+            return ((IdentifierType) t).s;
+        }
+        System.exit( -1 );
+        return "";
+    }
 }
 
 

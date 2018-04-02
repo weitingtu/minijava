@@ -203,7 +203,16 @@ public class SymbolUsageVisitor extends DepthFirstVisitor
         {
             return "int";
         }
-        return ( ( IdentifierType )t ).s;
+        if ( t instanceof DoubleType )
+        {
+            return "double";
+        }
+        if ( t instanceof IdentifierType )
+        {
+            return ((IdentifierType) t).s;
+        }
+        System.exit( -1 );
+        return "";
     }
 
     private void print( String id, Class c, Method m )
