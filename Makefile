@@ -34,7 +34,7 @@ $(PARSER): $(JAVACC_FILE)
 
 clean:
 	rm -rf $(JAVACC_OUTDIR) *.class
-	rm -f syntaxtree/*.class visitor/*.class
+	rm -f syntaxtree/*.class visitor/*.class input/*.class
 
 test1:
 	java Main < input/Factorial.java

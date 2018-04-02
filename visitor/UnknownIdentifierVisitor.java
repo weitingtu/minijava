@@ -22,7 +22,7 @@ public class UnknownIdentifierVisitor extends DepthFirstVisitor
         currClass = symbolTable.getClass( i1 );
 
         // ignore main parameter checking
-        n.i2.accept( this );
+        //n.i2.accept( this );
         n.s.accept( this );
     }
 
@@ -73,10 +73,10 @@ public class UnknownIdentifierVisitor extends DepthFirstVisitor
         n.t.accept( this );
         String id = n.i.toString();
         currMethod = currClass.getMethod( id );
-        for ( int i = 0; i < n.fl.size(); i++ )
+        /*for ( int i = 0; i < n.fl.size(); i++ )
         {
             n.fl.elementAt( i ).accept( this );
-        }
+        }*/
         for ( int i = 0; i < n.vl.size(); i++ )
         {
             n.vl.elementAt( i ).accept( this );
@@ -87,6 +87,20 @@ public class UnknownIdentifierVisitor extends DepthFirstVisitor
         }
         n.e.accept( this );
         currMethod = null;
+    }
+
+    // Exp e;
+    // Identifier i;
+    // ExpList el;
+    public void visit( Call n )
+    {
+        n.e.accept( this );
+        // Ignore method name check
+        //n.i.accept( this );
+        for ( int i = 0; i < n.el.size(); i++ )
+        {
+            n.el.elementAt( i ).accept( this );
+        }
     }
 
     // String s;
