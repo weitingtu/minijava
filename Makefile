@@ -45,6 +45,9 @@ test2:
 test3:
 	java Main < input/LessThanIfBooleanInt.java || (echo "Catched"; )
 	java Main < input/LessThanIfDoubleInt.java && (echo "Passed"; )
+	java Main < input/PlusIntDouble.java && (echo "Passed"; )
+	java Main < input/MinusIntDouble.java && (echo "Passed"; )
+	java Main < input/TimesIntDouble.java && (echo "Passed"; )
 
 pretty_test1:
 	java Main2 < input/Factorial.java
