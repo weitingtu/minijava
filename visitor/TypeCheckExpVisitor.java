@@ -166,6 +166,12 @@ public class TypeCheckExpVisitor extends TypeDepthFirstVisitor
         return new IntegerType();
     }
 
+    // double d;
+    public Type visit( DoubleLiteral n )
+    {
+        return new DoubleType();
+    }
+
     public Type visit( True n )
     {
         return new BooleanType();

@@ -320,6 +320,12 @@ public class PrettyPrintVisitor implements Visitor
         System.out.print( n.i );
     }
 
+    // double d;
+    public void visit( DoubleLiteral n )
+    {
+        System.out.print( n.d );
+    }
+
     public void visit( True n )
     {
         System.out.print( "true" );

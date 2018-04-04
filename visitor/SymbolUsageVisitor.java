@@ -139,8 +139,8 @@ public class SymbolUsageVisitor extends DepthFirstVisitor
         {
             print( n, currMethod, currClass );
         }
-        n.t.accept( this );
-        n.i.accept( this );
+        //n.t.accept( this );
+        //n.i.accept( this );
     }
 
     // Exp e;
@@ -179,7 +179,7 @@ public class SymbolUsageVisitor extends DepthFirstVisitor
         // IdRef-of-X, Class, Foo, Bar
         // IdRef-of-x, Class
         idRef = c.getIdRef();
-        System.out.println( c.getId() + " " + c.getIdRef() + ", Class" );
+        System.out.print( c.getId() + " " + c.getIdRef() + ", Class" );
         String parent = c.parent();
         while ( parent != null )
         {
@@ -187,6 +187,7 @@ public class SymbolUsageVisitor extends DepthFirstVisitor
             System.out.println( ", " + parentClass.getId() );
             parent = parentClass.parent();
         }
+        System.out.println();
     }
 
     private String getTypeString( Type t )
@@ -224,7 +225,7 @@ public class SymbolUsageVisitor extends DepthFirstVisitor
             if ( var == null )
             {
                 System.out.println( "Unable to get local " + id + " for " + c.getId() + "::" + m.getId() );
-                System.exit( 0 );
+                System.exit( -1 );
             }
             idRef = var.idRef();
             // IdRef-of-X, Local, type-of-X, Bar::foo()
@@ -237,7 +238,7 @@ public class SymbolUsageVisitor extends DepthFirstVisitor
             if ( var == null )
             {
                 System.out.println( "Unable to get data member " + id + " for " + c.getId() );
-                System.exit( 0 );
+                System.exit( -1 );
             }
             idRef = var.idRef();
             // IdRef-of-X, Data member, type-of-X, Bar
@@ -246,7 +247,7 @@ public class SymbolUsageVisitor extends DepthFirstVisitor
         else
         {
             System.out.println( "Print " + id + " with null class and method" );
-            System.exit( 0 );
+            System.exit( -1 );
         }
     }
 
@@ -276,7 +277,7 @@ public class SymbolUsageVisitor extends DepthFirstVisitor
         if ( var == null )
         {
             System.out.println( "Unable to get parameter " + f.i.toString() + " for " + c.getId() + "::" + m.getId() );
-            System.exit( 0 );
+            System.exit( -1 );
         }
         idRef = var.idRef();
         // IdRef-of-X, Param, type-of-X, Bar::foo()

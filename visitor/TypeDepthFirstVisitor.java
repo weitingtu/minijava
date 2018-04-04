@@ -263,6 +263,12 @@ public class TypeDepthFirstVisitor implements TypeVisitor
         return null;
     }
 
+    // double d;
+    public Type visit( DoubleLiteral n )
+    {
+        return null;
+    }
+
     public Type visit( True n )
     {
         return null;

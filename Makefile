@@ -35,6 +35,7 @@ $(PARSER): $(JAVACC_FILE)
 clean:
 	rm -rf $(JAVACC_OUTDIR) *.class
 	rm -f syntaxtree/*.class visitor/*.class input/*.class
+	rm -f *.rpt
 
 test1:
 	java Main < input/Factorial.java
@@ -42,7 +43,19 @@ test1:
 test2:
 	java Main < input/BinarySearch.java
 
-test3:
+test_task1:
+	rm -f *.rpt;
+	@for p in MyVisitor Visitor nti visit Start v_key ifound ; do \
+        echo "Check $$p usage "; \
+    	(java Main $$p < input/TreeVisitor.java > $$p.rpt ; diff $$p.rpt golden/$$p.rpt) && ( echo "Passed"; ) ; \
+	done; \
+    echo "Check Unknown identifier "; \
+	(java Main < input/UnknownIdentifier.java > UnknownIdentifier.rpt ; diff UnknownIdentifier.rpt golden/UnknownIdentifier.rpt) && ( echo "Passed"; ) ; \
+    echo "Check Redeclaration of an identifier "; \
+	(java Main < input/Redeclaration.java > Redeclaration.rpt ; diff Redeclaration.rpt golden/Redeclaration.rpt) && ( echo "Passed"; ) ;
+	java Main < input/Double.java && (echo "Passed"; )
+
+test_task2:
 	java Main < input/LessThanIfBooleanInt.java || (echo "Catched"; )
 	java Main < input/LessThanIfDoubleInt.java && (echo "Passed"; )
 	java Main < input/PlusIntDouble.java && (echo "Passed"; )

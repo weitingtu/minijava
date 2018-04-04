@@ -236,6 +236,11 @@ public class DepthFirstVisitor implements Visitor
     {
     }
 
+    // double d;
+    public void visit( DoubleLiteral n )
+    {
+    }
+
     public void visit( True n )
     {
     }

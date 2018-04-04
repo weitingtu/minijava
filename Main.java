@@ -18,19 +18,21 @@ public class Main
             // Check unknown identifier
             root.accept( new UnknownIdentifierVisitor( buildSymTab.getSymTab() ) );
 
-            // Find symbol usage
             if ( args.length == 1 )
             {
+                // Find symbol usage
                 System.out.println( "Naming and Scoping " + args[0] );
                 SymbolUsageVisitor task1 =
                     new SymbolUsageVisitor( buildSymTab.getSymTab(), args[0] );
                 root.accept( task1 );
             }
-
-            // Type check
-            TypeCheckVisitor typeCheck =
-                new TypeCheckVisitor( buildSymTab.getSymTab() );
-            root.accept( typeCheck );
+            else
+            {
+                // Type check
+                TypeCheckVisitor typeCheck =
+                    new TypeCheckVisitor( buildSymTab.getSymTab() );
+                root.accept( typeCheck );
+            }
         }
         catch ( ParseException e )
         {

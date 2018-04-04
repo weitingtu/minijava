@@ -1,0 +1,2 @@
+size is already defined in Test
+size: Redeclaration ( is already defined in 11,9 redeclared in 12,9)

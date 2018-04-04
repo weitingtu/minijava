@@ -109,7 +109,7 @@ public class UnknownIdentifierVisitor extends DepthFirstVisitor
         if( !find(n.s, currClass, currMethod) )
         {
             // <Identifier’s value>: Unknown identifier (<Location of the identifier>)
-            System.out.println( n.s + ": Unknown identifier ( " + n.beginLine + "," + n.beginColumn + " )");
+            System.out.println( n.s + ": Unknown identifier in IdentifierExp ( " + n.beginLine + "," + n.beginColumn + " )");
             System.exit( -1 );
         }
     }
@@ -120,7 +120,7 @@ public class UnknownIdentifierVisitor extends DepthFirstVisitor
         if( !find(n.s, currClass, currMethod) )
         {
             // <Identifier’s value>: Unknown identifier (<Location of the identifier>)
-            System.out.println( n.s + ": Unknown identifier ( " + n.beginLine + "," + n.beginColumn + " )");
+            System.out.println( n.s + ": Unknown identifier in Identifier ( " + n.beginLine + "," + n.beginColumn + " )");
             System.exit( -1 );
         }
     }
@@ -131,7 +131,7 @@ public class UnknownIdentifierVisitor extends DepthFirstVisitor
         {
             return false;
         }
-
+        
         return m.containsParam(id) || m.containsVar(id);
     }
 

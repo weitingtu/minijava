@@ -154,6 +154,18 @@ class SymbolTable
         {
             return true;
         }
+        if ( t1 instanceof DoubleType && t2 instanceof  DoubleType )
+        {
+            return true;
+        }
+        if ( t1 instanceof IntegerType && t2 instanceof  DoubleType )
+        {
+            return true;
+        }
+        if ( t1 instanceof DoubleType && t2 instanceof  IntegerType )
+        {
+            return true;
+        }
         if ( t1 instanceof BooleanType && t2 instanceof  BooleanType )
         {
             return true;
@@ -413,10 +425,12 @@ class Method
     public boolean containsParam( String id )
     {
         for ( int i = 0; i < params.size(); i++ )
-            if ( ( ( Variable )params.elementAt( i ) ).id.equals( id ) )
+        {
+            if ( ( ( Variable )params.elementAt( i ) ).id().equals( id ) )
             {
                 return true;
             }
+        }
         return false;
     }
 
@@ -436,12 +450,21 @@ class Method
     public Variable getParam( String id )
     {
         for ( int i = 0; i < params.size(); i++ )
-            if ( ( ( Variable )params.elementAt( i ) ).id.equals( id ) )
+            if ( ( ( Variable )params.elementAt( i ) ).id().equals( id ) )
             {
                 return ( Variable )( params.elementAt( i ) );
             }
 
         return null;
+    }
+
+    void printParams() 
+    {
+        for ( int i = 0; i < params.size(); i++ )
+        {
+             System.out.print((( Variable )params.elementAt( i )).id());
+        }
+        System.out.println();
     }
 
 } // Method
