@@ -248,6 +248,9 @@ Type Type() :
   LOOKAHEAD(3)
   t=ArrayType()
 |
+  LOOKAHEAD(3)
+  t=DoubleArrayType()
+|
   t=BooleanType()
 |
   t=IntegerType()
@@ -264,6 +267,13 @@ Type ArrayType() :
 {
   "int" "[" "]"
   { return new IntArrayType(); }
+}
+
+Type DoubleArrayType() :
+{}
+{
+  "double" "[" "]"
+  { return new DoubleArrayType(); }
 }
 
 Type BooleanType() :
@@ -498,6 +508,9 @@ Exp PrimaryExpression() :
   LOOKAHEAD(3)
   e=ArrayAllocationExpression()
 |
+  LOOKAHEAD(3)
+  e=DoubleArrayAllocationExpression()
+|
   e=AllocationExpression()
 |   
   e=NotExpression()
@@ -554,6 +567,13 @@ Exp ArrayAllocationExpression() :
 {
   "new" "int" "[" e=Expression() "]"
   { return new NewArray(e); }
+}
+
+Exp DoubleArrayAllocationExpression() :
+{ Exp e; }
+{
+  "new" "double" "[" e=Expression() "]"
+  { return new NewDoubleArray(e); }
 }
 
 Exp AllocationExpression() :

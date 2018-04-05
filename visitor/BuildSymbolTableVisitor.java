@@ -237,6 +237,11 @@ public class BuildSymbolTableVisitor extends TypeDepthFirstVisitor
         return n;
     }
 
+    public Type visit( DoubleArrayType n )
+    {
+        return n;
+    }
+
     public Type visit( BooleanType n )
     {
         return n;

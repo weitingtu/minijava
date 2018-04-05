@@ -106,7 +106,7 @@ public class TypeCheckVisitor extends DepthFirstVisitor
         if ( symbolTable.compareTypes( retType, n.e.accept( new TypeCheckExpVisitor() ) ) == false )
         {
             System.out.println( "Wrong return type for method " + id );
-            System.exit( 0 );
+            System.exit( -1 );
         }
     }
 
@@ -165,20 +165,22 @@ public class TypeCheckVisitor extends DepthFirstVisitor
         if ( symbolTable.compareTypes( t1, t2 ) == false )
         {
             System.out.println( "Type error in assignment to " + n.i.toString() );
-            System.exit( 0 );
+            System.exit( -1 );
         }
     }
 
     // Identifier i;
     // Exp e1,e2;
+    // i [e1] = e2;
     public void visit( ArrayAssign n )
     {
         Type typeI = symbolTable.getVarType( currMethod, currClass, n.i.toString() );
 
-        if ( ! ( typeI instanceof IntArrayType ) )
+        if ( ! ( typeI instanceof IntArrayType 
+                    || typeI instanceof DoubleArrayType ) )
         {
             System.out.println( "The identifier in an array assignment" +
-                                "must be of type int []" );
+                                "must be of type int [] or double []" );
             System.exit( -1 );
         }
 
@@ -188,10 +190,11 @@ public class TypeCheckVisitor extends DepthFirstVisitor
                                 "must be of type int" );
             System.exit( -1 );
         }
-        if ( ! ( n.e1.accept( new TypeCheckExpVisitor() ) instanceof IntegerType ) )
+        if ( ! ( n.e2.accept( new TypeCheckExpVisitor() ) instanceof IntegerType  
+                    || n.e2.accept( new TypeCheckExpVisitor() ) instanceof  DoubleType) )
         {
             System.out.println( "The second expression in an array assignment" +
-                                "must be of type int" );
+                                "must be of type int or double" );
             System.exit( -1 );
         }
     }
@@ -201,6 +204,10 @@ public class TypeCheckVisitor extends DepthFirstVisitor
         if ( t instanceof IntArrayType )
         {
             return "int []";
+        }
+        if ( t instanceof DoubleArrayType )
+        {
+            return "double []";
         }
         if ( t instanceof BooleanType )
         {

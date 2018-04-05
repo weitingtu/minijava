@@ -61,6 +61,8 @@ test_task2:
 	java Main < input/PlusIntDouble.java && (echo "Passed"; )
 	java Main < input/MinusIntDouble.java && (echo "Passed"; )
 	java Main < input/TimesIntDouble.java && (echo "Passed"; )
+	java Main < input/Array.java && (echo "Passed"; )
+	java Main < input/AssignDoubleArrayBoolean.java || (echo "Catched"; )
 
 pretty_test1:
 	java Main2 < input/Factorial.java

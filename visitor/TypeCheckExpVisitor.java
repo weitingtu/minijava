@@ -94,11 +94,13 @@ public class TypeCheckExpVisitor extends TypeDepthFirstVisitor
     }
 
     // Exp e1,e2;
+    // e1 [e2] 
     public Type visit( ArrayLookup n )
     {
-        if ( ! ( n.e1.accept( this ) instanceof IntArrayType ) )
+        if ( ! (( n.e1.accept( this ) instanceof IntArrayType ) 
+                || ( n.e1.accept( this ) instanceof DoubleArrayType ) ))
         {
-            System.out.println( "Left side of ArrayLookup must be of type integer" );
+            System.out.println( "Left side of ArrayLength must be of type integer or double" );
             System.exit( -1 );
         }
         if ( ! ( n.e2.accept( this ) instanceof IntegerType ) )
@@ -106,15 +108,18 @@ public class TypeCheckExpVisitor extends TypeDepthFirstVisitor
             System.out.println( "Right side of ArrayLookup must be of type integer" );
             System.exit( -1 );
         }
+        if ( n.e1.accept( this ) instanceof IntArrayType ) 
         return new IntegerType();
+        else return new DoubleType();
     }
 
     // Exp e;
     public Type visit( ArrayLength n )
     {
-        if ( ! ( n.e.accept( this ) instanceof IntArrayType ) )
+        if ( ! (( n.e.accept( this ) instanceof IntArrayType ) 
+                || ( n.e.accept( this ) instanceof DoubleArrayType ) ))
         {
-            System.out.println( "Left side of ArrayLength must be of type integer" );
+            System.out.println( "Left side of ArrayLength must be of type integer or double" );
             System.exit( -1 );
         }
         return new IntegerType();
@@ -204,6 +209,18 @@ public class TypeCheckExpVisitor extends TypeDepthFirstVisitor
             System.exit( -1 );
         }
         return new IntArrayType();
+    }
+
+    // Exp e;
+    public Type visit( NewDoubleArray n )
+    {
+
+        if ( ! ( n.e.accept( this ) instanceof IntegerType ) )
+        {
+            System.out.println( "Left side of NewDoubleArray must be of type integer" );
+            System.exit( -1 );
+        }
+        return new DoubleArrayType();
     }
 
     // Identifier i;

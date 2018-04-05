@@ -92,7 +92,7 @@ class SymbolTable
 
         System.out.println( "Variable " + id
                             + " not defined in current scope" );
-        System.exit( 0 ); // Panic!
+        System.exit( -1 ); // Panic!
         return null;
     }
 
@@ -105,7 +105,7 @@ class SymbolTable
         if ( c == null )
         {
             System.out.println( "Class " + cName + " not defined" );
-            System.exit( 0 ); // Panic!
+            System.exit( -1 ); // Panic!
         }
 
         // Try to find the declared method along the class hierarchy
@@ -127,7 +127,7 @@ class SymbolTable
 
         System.out.println( "Method " + id + " not defined in class " + cName );
 
-        System.exit( 0 );
+        System.exit( -1 );
         return null;
     }
 
@@ -171,6 +171,10 @@ class SymbolTable
             return true;
         }
         if ( t1 instanceof IntArrayType && t2 instanceof IntArrayType )
+        {
+            return true;
+        }
+        if ( t1 instanceof DoubleArrayType && t2 instanceof DoubleArrayType )
         {
             return true;
         }

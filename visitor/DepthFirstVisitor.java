@@ -104,6 +104,10 @@ public class DepthFirstVisitor implements Visitor
     {
     }
 
+    public void visit( DoubleArrayType n )
+    {
+    }
+
     public void visit( BooleanType n )
     {
     }
@@ -260,6 +264,12 @@ public class DepthFirstVisitor implements Visitor
 
     // Exp e;
     public void visit( NewArray n )
+    {
+        n.e.accept( this );
+    }
+
+    // Exp e;
+    public void visit( NewDoubleArray n )
     {
         n.e.accept( this );
     }

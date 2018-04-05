@@ -143,6 +143,11 @@ public class PrettyPrintVisitor implements Visitor
         System.out.print( "int []" );
     }
 
+    public void visit( DoubleArrayType n )
+    {
+        System.out.print( "double []" );
+    }
+
     public void visit( BooleanType n )
     {
         System.out.print( "boolean" );

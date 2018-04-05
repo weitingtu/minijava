@@ -196,6 +196,10 @@ public class SymbolUsageVisitor extends DepthFirstVisitor
         {
             return "int []";
         }
+        if ( t instanceof DoubleArrayType )
+        {
+            return "double []";
+        }
         if ( t instanceof BooleanType )
         {
             return "boolean";

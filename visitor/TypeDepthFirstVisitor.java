@@ -112,6 +112,11 @@ public class TypeDepthFirstVisitor implements TypeVisitor
         return null;
     }
 
+    public Type visit( DoubleArrayType n )
+    {
+        return null;
+    }
+
     public Type visit( BooleanType n )
     {
         return null;
@@ -292,6 +297,13 @@ public class TypeDepthFirstVisitor implements TypeVisitor
 
     // Exp e;
     public Type visit( NewArray n )
+    {
+        n.e.accept( this );
+        return null;
+    }
+
+    // Exp e;
+    public Type visit( NewDoubleArray n )
     {
         n.e.accept( this );
         return null;

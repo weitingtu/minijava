@@ -12,6 +12,7 @@ public interface Visitor
     public void visit( MethodDecl n );
     public void visit( Formal n );
     public void visit( IntArrayType n );
+    public void visit( DoubleArrayType n );
     public void visit( BooleanType n );
     public void visit( IntegerType n );
     public void visit( DoubleType n );
@@ -37,6 +38,7 @@ public interface Visitor
     public void visit( IdentifierExp n );
     public void visit( This n );
     public void visit( NewArray n );
+    public void visit( NewDoubleArray n );
     public void visit( NewObject n );
     public void visit( Not n );
     public void visit( Identifier n );
