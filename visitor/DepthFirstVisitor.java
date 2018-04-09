@@ -182,6 +182,13 @@ public class DepthFirstVisitor implements Visitor
     }
 
     // Exp e1,e2;
+    public void visit( Or n )
+    {
+        n.e1.accept( this );
+        n.e2.accept( this );
+    }
+
+    // Exp e1,e2;
     public void visit( LessThan n )
     {
         n.e1.accept( this );
@@ -202,8 +209,28 @@ public class DepthFirstVisitor implements Visitor
         n.e2.accept( this );
     }
 
+    // Exp e;
+    public void visit( UnaryMinus n )
+    {
+        n.e.accept( this );
+    }
+
     // Exp e1,e2;
     public void visit( Times n )
+    {
+        n.e1.accept( this );
+        n.e2.accept( this );
+    }
+
+    // Exp e1,e2;
+    public void visit( Divide n )
+    {
+        n.e1.accept( this );
+        n.e2.accept( this );
+    }
+
+    // Exp e1,e2;
+    public void visit( Power n )
     {
         n.e1.accept( this );
         n.e2.accept( this );
@@ -288,5 +315,43 @@ public class DepthFirstVisitor implements Visitor
     // String s;
     public void visit( Identifier n )
     {
+    }
+
+    public void visit( StmtExprList n )
+    {
+        for ( int i = 0; i < n.size(); i++ )
+        {
+            n.elementAt( i ).accept( this );
+        }
+    }
+
+    public void visit( For n )
+    {
+        n.fi.accept( this );
+        n.e.accept( this );
+        n.sel.accept( this );
+        n.s.accept( this );
+    }
+
+    public void visit( AssignExpr n )
+    {
+        n.i.accept( this );
+        n.e.accept( this );
+    }
+
+    public void visit( ArrayAssignExpr n )
+    {
+        n.i.accept( this );
+        n.idx.accept( this );
+        n.e.accept( this );
+    }
+
+    public void visit( LocalVarDeclaration n )
+    {
+        n.t.accept( this );
+        for ( int i = 0; i < n.al.size(); i++ )
+        {
+            n.al.elementAt( i ).accept( this );
+        }
     }
 }

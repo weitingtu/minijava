@@ -202,6 +202,14 @@ public class TypeDepthFirstVisitor implements TypeVisitor
     }
 
     // Exp e1,e2;
+    public Type visit( Or n )
+    {
+        n.e1.accept( this );
+        n.e2.accept( this );
+        return null;
+    }
+
+    // Exp e1,e2;
     public Type visit( LessThan n )
     {
         n.e1.accept( this );
@@ -225,8 +233,31 @@ public class TypeDepthFirstVisitor implements TypeVisitor
         return null;
     }
 
+    // Exp e;
+    public Type visit( UnaryMinus n )
+    {
+        n.e.accept( this );
+        return null;
+    }
+
     // Exp e1,e2;
     public Type visit( Times n )
+    {
+        n.e1.accept( this );
+        n.e2.accept( this );
+        return null;
+    }
+
+    // Exp e1,e2;
+    public Type visit( Divide n )
+    {
+        n.e1.accept( this );
+        n.e2.accept( this );
+        return null;
+    }
+
+    // Exp e1,e2;
+    public Type visit( Power n )
     {
         n.e1.accept( this );
         n.e2.accept( this );
@@ -325,6 +356,49 @@ public class TypeDepthFirstVisitor implements TypeVisitor
     // String s;
     public Type visit( Identifier n )
     {
+        return null;
+    }
+
+    public Type visit( StmtExprList n )
+    {
+        for ( int i = 0; i < n.size(); i++ )
+        {
+            n.elementAt( i ).accept( this );
+        }
+        return null;
+    }
+
+    public Type visit( For n )
+    {
+        n.fi.accept( this );
+        n.e.accept( this );
+        n.sel.accept( this );
+        n.s.accept( this );
+        return null;
+    }
+
+    public Type visit( AssignExpr n )
+    {
+        n.i.accept( this );
+        n.e.accept( this );
+        return null;
+    }
+
+    public Type visit( ArrayAssignExpr n )
+    {
+        n.i.accept( this );
+        n.idx.accept( this );
+        n.e.accept( this );
+        return null;
+    }
+
+    public Type visit( LocalVarDeclaration n )
+    {
+        n.t.accept( this );
+        for ( int i = 0; i < n.al.size(); i++ )
+        {
+            n.al.elementAt( i ).accept( this );
+        }
         return null;
     }
 }

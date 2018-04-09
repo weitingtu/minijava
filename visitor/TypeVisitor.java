@@ -24,10 +24,14 @@ public interface TypeVisitor
     public Type visit( Assign n );
     public Type visit( ArrayAssign n );
     public Type visit( And n );
+    public Type visit( Or n );
     public Type visit( LessThan n );
     public Type visit( Plus n );
     public Type visit( Minus n );
+    public Type visit( UnaryMinus n );
     public Type visit( Times n );
+    public Type visit( Divide n );
+    public Type visit( Power n );
     public Type visit( ArrayLookup n );
     public Type visit( ArrayLength n );
     public Type visit( Call n );
@@ -42,4 +46,10 @@ public interface TypeVisitor
     public Type visit( NewObject n );
     public Type visit( Not n );
     public Type visit( Identifier n );
+
+    public Type visit( StmtExprList n );
+    public Type visit( For n );
+    public Type visit( AssignExpr n );
+    public Type visit( ArrayAssignExpr n );
+    public Type visit( LocalVarDeclaration n );
 }

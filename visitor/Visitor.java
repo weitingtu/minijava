@@ -24,10 +24,14 @@ public interface Visitor
     public void visit( Assign n );
     public void visit( ArrayAssign n );
     public void visit( And n );
+    public void visit( Or n );
     public void visit( LessThan n );
     public void visit( Plus n );
     public void visit( Minus n );
+    public void visit( UnaryMinus n );
     public void visit( Times n );
+    public void visit( Divide n );
+    public void visit( Power n );
     public void visit( ArrayLookup n );
     public void visit( ArrayLength n );
     public void visit( Call n );
@@ -42,4 +46,10 @@ public interface Visitor
     public void visit( NewObject n );
     public void visit( Not n );
     public void visit( Identifier n );
+
+    public void visit( StmtExprList n );
+    public void visit( For n );
+    public void visit( AssignExpr n );
+    public void visit( ArrayAssignExpr n );
+    public void visit( LocalVarDeclaration n );
 }
