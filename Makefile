@@ -50,9 +50,9 @@ test_task1:
     	(java Main $$p < input/TreeVisitor.java > $$p.rpt ; diff $$p.rpt golden/$$p.rpt) && ( echo "Passed"; ) ; \
 	done; \
     echo "Check Unknown identifier "; \
-	(java Main < input/UnknownIdentifier.java > UnknownIdentifier.rpt ; diff UnknownIdentifier.rpt golden/UnknownIdentifier.rpt) && ( echo "Passed"; ) ; \
+	(java Main task1 < input/UnknownIdentifier.java > UnknownIdentifier.rpt ; diff UnknownIdentifier.rpt golden/UnknownIdentifier.rpt) && ( echo "Passed"; ) ; \
     echo "Check Redeclaration of an identifier "; \
-	(java Main < input/Redeclaration.java > Redeclaration.rpt ; diff Redeclaration.rpt golden/Redeclaration.rpt) && ( echo "Passed"; ) ;
+	(java Main task1 < input/Redeclaration.java > Redeclaration.rpt ; diff Redeclaration.rpt golden/Redeclaration.rpt) && ( echo "Passed"; ) ;
 	java Main < input/Double.java && (echo "Passed"; )
 
 test_task2:

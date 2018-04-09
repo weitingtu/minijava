@@ -8,6 +8,12 @@ public class UnknownIdentifierVisitor extends DepthFirstVisitor
     static Method currMethod;
     static SymbolTable symbolTable;
     private int idRef;
+    private int unknownIdCount;
+
+    public int getUnknownIdCount()
+    {
+        return unknownIdCount;
+    }
 
     public UnknownIdentifierVisitor( SymbolTable s )
     {
@@ -106,60 +112,60 @@ public class UnknownIdentifierVisitor extends DepthFirstVisitor
     // String s;
     public void visit( IdentifierExp n )
     {
-        if( !find(n.s, currClass, currMethod) )
+        if ( !find( n.s, currClass, currMethod ) )
         {
             // <Identifier’s value>: Unknown identifier (<Location of the identifier>)
-            System.out.println( n.s + ": Unknown identifier in IdentifierExp ( " + n.beginLine + "," + n.beginColumn + " )");
-            System.exit( -1 );
+            System.out.println( n.s + ": Unknown identifier in IdentifierExp ( " + n.beginLine + "," + n.beginColumn + " )" );
+            unknownIdCount++;
         }
     }
 
     // String s;
     public void visit( Identifier n )
     {
-        if( !find(n.s, currClass, currMethod) )
+        if ( !find( n.s, currClass, currMethod ) )
         {
             // <Identifier’s value>: Unknown identifier (<Location of the identifier>)
-            System.out.println( n.s + ": Unknown identifier in Identifier ( " + n.beginLine + "," + n.beginColumn + " )");
-            System.exit( -1 );
+            System.out.println( n.s + ": Unknown identifier in Identifier ( " + n.beginLine + "," + n.beginColumn + " )" );
+            unknownIdCount++;
         }
     }
 
-    private boolean find(String id, Method m) 
+    private boolean find( String id, Method m )
     {
-        if(m == null)
-        {
-            return false;
-        }
-        
-        return m.containsParam(id) || m.containsVar(id);
-    }
-
-    private boolean find(String id, Class c ) 
-    {
-        if(c == null)
+        if ( m == null )
         {
             return false;
         }
 
-        if(c.containsVar(id))
+        return m.containsParam( id ) || m.containsVar( id );
+    }
+
+    private boolean find( String id, Class c )
+    {
+        if ( c == null )
+        {
+            return false;
+        }
+
+        if ( c.containsVar( id ) )
         {
             return true;
         }
-        if(c.parent() == null)
+        if ( c.parent() == null )
         {
             return false;
         }
-        return find(id, symbolTable.getClass(c.parent()));
+        return find( id, symbolTable.getClass( c.parent() ) );
     }
 
-    private boolean find(String id, Class c, Method m) 
+    private boolean find( String id, Class c, Method m )
     {
-        if( find(id, m) )
+        if ( find( id, m ) )
         {
             return true;
         }
-        return find(id, c);
+        return find( id, c );
     }
 }
 

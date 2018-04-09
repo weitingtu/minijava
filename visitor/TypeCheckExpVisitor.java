@@ -24,14 +24,14 @@ public class TypeCheckExpVisitor extends TypeDepthFirstVisitor
     // Exp e1,e2;
     public Type visit( LessThan n )
     {
-        if ( ! (( n.e1.accept( this ) instanceof IntegerType ) 
-                    || ( n.e1.accept( this ) instanceof DoubleType )))
+        if ( ! ( ( n.e1.accept( this ) instanceof IntegerType )
+                 || ( n.e1.accept( this ) instanceof DoubleType ) ) )
         {
             System.out.println( "Left side of LessThan must be of type integer or double" );
             System.exit( -1 );
         }
-        if ( ! (( n.e2.accept( this ) instanceof IntegerType ) 
-                    || ( n.e2.accept( this ) instanceof DoubleType )))
+        if ( ! ( ( n.e2.accept( this ) instanceof IntegerType )
+                 || ( n.e2.accept( this ) instanceof DoubleType ) ) )
         {
             System.out.println( "Right side of LessThan must be of type integer or double" );
             System.exit( -1 );
@@ -42,14 +42,14 @@ public class TypeCheckExpVisitor extends TypeDepthFirstVisitor
     // Exp e1,e2;
     public Type visit( Plus n )
     {
-        if ( ! (( n.e1.accept( this ) instanceof IntegerType ) 
-                    || ( n.e1.accept( this ) instanceof DoubleType )))
+        if ( ! ( ( n.e1.accept( this ) instanceof IntegerType )
+                 || ( n.e1.accept( this ) instanceof DoubleType ) ) )
         {
             System.out.println( "Left side of PLus must be of type integer or double" );
             System.exit( -1 );
         }
-        if ( ! (( n.e1.accept( this ) instanceof IntegerType ) 
-                    || ( n.e1.accept( this ) instanceof DoubleType )))
+        if ( ! ( ( n.e1.accept( this ) instanceof IntegerType )
+                 || ( n.e1.accept( this ) instanceof DoubleType ) ) )
         {
             System.out.println( "Right side of Plus must be of type integer or double" );
             System.exit( -1 );
@@ -60,14 +60,14 @@ public class TypeCheckExpVisitor extends TypeDepthFirstVisitor
     // Exp e1,e2;
     public Type visit( Minus n )
     {
-        if ( ! (( n.e1.accept( this ) instanceof IntegerType ) 
-                    || ( n.e1.accept( this ) instanceof DoubleType )))
+        if ( ! ( ( n.e1.accept( this ) instanceof IntegerType )
+                 || ( n.e1.accept( this ) instanceof DoubleType ) ) )
         {
             System.out.println( "Left side of Minus must be of type integeri or double" );
             System.exit( -1 );
         }
-        if ( ! (( n.e1.accept( this ) instanceof IntegerType ) 
-                    || ( n.e1.accept( this ) instanceof DoubleType )))
+        if ( ! ( ( n.e1.accept( this ) instanceof IntegerType )
+                 || ( n.e1.accept( this ) instanceof DoubleType ) ) )
         {
             System.out.println( "Right side of Minus must be of type integer or double" );
             System.exit( -1 );
@@ -78,14 +78,14 @@ public class TypeCheckExpVisitor extends TypeDepthFirstVisitor
     // Exp e1,e2;
     public Type visit( Times n )
     {
-        if ( ! (( n.e1.accept( this ) instanceof IntegerType ) 
-                    || ( n.e1.accept( this ) instanceof DoubleType )))
+        if ( ! ( ( n.e1.accept( this ) instanceof IntegerType )
+                 || ( n.e1.accept( this ) instanceof DoubleType ) ) )
         {
             System.out.println( "Left side of Times must be of type integer" );
             System.exit( -1 );
         }
-        if ( ! (( n.e1.accept( this ) instanceof IntegerType ) 
-                    || ( n.e1.accept( this ) instanceof DoubleType )))
+        if ( ! ( ( n.e1.accept( this ) instanceof IntegerType )
+                 || ( n.e1.accept( this ) instanceof DoubleType ) ) )
         {
             System.out.println( "Right side of Times must be of type integer" );
             System.exit( -1 );
@@ -94,11 +94,11 @@ public class TypeCheckExpVisitor extends TypeDepthFirstVisitor
     }
 
     // Exp e1,e2;
-    // e1 [e2] 
+    // e1 [e2]
     public Type visit( ArrayLookup n )
     {
-        if ( ! (( n.e1.accept( this ) instanceof IntArrayType ) 
-                || ( n.e1.accept( this ) instanceof DoubleArrayType ) ))
+        if ( ! ( ( n.e1.accept( this ) instanceof IntArrayType )
+                 || ( n.e1.accept( this ) instanceof DoubleArrayType ) ) )
         {
             System.out.println( "Left side of ArrayLength must be of type integer or double" );
             System.exit( -1 );
@@ -108,16 +108,18 @@ public class TypeCheckExpVisitor extends TypeDepthFirstVisitor
             System.out.println( "Right side of ArrayLookup must be of type integer" );
             System.exit( -1 );
         }
-        if ( n.e1.accept( this ) instanceof IntArrayType ) 
-        return new IntegerType();
-        else return new DoubleType();
+        if ( n.e1.accept( this ) instanceof IntArrayType )
+        {
+            return new IntegerType();
+        }
+        else { return new DoubleType(); }
     }
 
     // Exp e;
     public Type visit( ArrayLength n )
     {
-        if ( ! (( n.e.accept( this ) instanceof IntArrayType ) 
-                || ( n.e.accept( this ) instanceof DoubleArrayType ) ))
+        if ( ! ( ( n.e.accept( this ) instanceof IntArrayType )
+                 || ( n.e.accept( this ) instanceof DoubleArrayType ) ) )
         {
             System.out.println( "Left side of ArrayLength must be of type integer or double" );
             System.exit( -1 );

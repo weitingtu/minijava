@@ -12,6 +12,8 @@ class Test {
 
     public int Start(int sz){
         i = sz;
+        j = sz;
+        k = sz;
         return 0;
     }
 }

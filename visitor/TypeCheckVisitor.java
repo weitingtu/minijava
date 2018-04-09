@@ -176,8 +176,8 @@ public class TypeCheckVisitor extends DepthFirstVisitor
     {
         Type typeI = symbolTable.getVarType( currMethod, currClass, n.i.toString() );
 
-        if ( ! ( typeI instanceof IntArrayType 
-                    || typeI instanceof DoubleArrayType ) )
+        if ( ! ( typeI instanceof IntArrayType
+                 || typeI instanceof DoubleArrayType ) )
         {
             System.out.println( "The identifier in an array assignment" +
                                 "must be of type int [] or double []" );
@@ -190,8 +190,8 @@ public class TypeCheckVisitor extends DepthFirstVisitor
                                 "must be of type int" );
             System.exit( -1 );
         }
-        if ( ! ( n.e2.accept( new TypeCheckExpVisitor() ) instanceof IntegerType  
-                    || n.e2.accept( new TypeCheckExpVisitor() ) instanceof  DoubleType) )
+        if ( ! ( n.e2.accept( new TypeCheckExpVisitor() ) instanceof IntegerType
+                 || n.e2.accept( new TypeCheckExpVisitor() ) instanceof  DoubleType ) )
         {
             System.out.println( "The second expression in an array assignment" +
                                 "must be of type int or double" );
@@ -223,7 +223,7 @@ public class TypeCheckVisitor extends DepthFirstVisitor
         }
         if ( t instanceof IdentifierType )
         {
-            return ((IdentifierType) t).s;
+            return ( ( IdentifierType ) t ).s;
         }
         System.exit( -1 );
         return "";

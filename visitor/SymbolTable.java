@@ -462,11 +462,11 @@ class Method
         return null;
     }
 
-    void printParams() 
+    void printParams()
     {
         for ( int i = 0; i < params.size(); i++ )
         {
-             System.out.print((( Variable )params.elementAt( i )).id());
+            System.out.print( ( ( Variable )params.elementAt( i ) ).id() );
         }
         System.out.println();
     }

@@ -16,7 +16,15 @@ public class Main
             root.accept( buildSymTab );
 
             // Check unknown identifier
-            root.accept( new UnknownIdentifierVisitor( buildSymTab.getSymTab() ) );
+            //root.accept( new UnknownIdentifierVisitor( buildSymTab.getSymTab() ) );
+            UnknownIdentifierVisitor unknownId = new UnknownIdentifierVisitor( buildSymTab.getSymTab() );
+            root.accept( unknownId );
+
+            if ( buildSymTab.getRedeclarationCount() > 0 || unknownId.getUnknownIdCount() > 0 )
+            {
+                System.out.println( "Syntax error" );
+                System.exit( -1 );
+            }
 
             if ( args.length == 1 )
             {

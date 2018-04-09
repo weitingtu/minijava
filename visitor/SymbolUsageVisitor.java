@@ -214,7 +214,7 @@ public class SymbolUsageVisitor extends DepthFirstVisitor
         }
         if ( t instanceof IdentifierType )
         {
-            return ((IdentifierType) t).s;
+            return ( ( IdentifierType ) t ).s;
         }
         System.exit( -1 );
         return "";

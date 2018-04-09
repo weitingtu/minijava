@@ -10,6 +10,9 @@ class Redeclaration {
 class Test {
     int size ;
     int size ;
+    int size ;
+    int size ;
+    int size ;
 
     public int Start(int sz){
         return 0;

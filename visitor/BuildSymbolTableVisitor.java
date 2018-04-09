@@ -12,11 +12,17 @@ public class BuildSymbolTableVisitor extends TypeDepthFirstVisitor
     {
         symbolTable = new SymbolTable();
         currIdRef = 0;
+        redeclarationCount = 0;
     }
 
     public SymbolTable getSymTab()
     {
         return symbolTable;
+    }
+
+    public int getRedeclarationCount()
+    {
+        return redeclarationCount;
     }
 
     // In global scope => both currClass and currMethod are null
@@ -29,6 +35,7 @@ public class BuildSymbolTableVisitor extends TypeDepthFirstVisitor
     private Class currClass;
     private Method currMethod;
     private int currIdRef;
+    private int redeclarationCount;
 
     // Note: Because in MiniJava there is no nested scopes and all local
     // variables can only be declared at the beginning of a method. This "hack"
@@ -146,10 +153,10 @@ public class BuildSymbolTableVisitor extends TypeDepthFirstVisitor
                 System.out.println( id + " is already defined in "
                                     + currClass.getId() );
                 // <Identifier’s value>: Redeclaration (<Location of the 1st declaration of the identifier> and <Location of the redeclared identifier>)
-                Variable var = currClass.getVar(id);
-                System.out.println( id + ": Redeclaration ( is already defined in " + var.i().beginLine + "," + var.i().beginColumn 
+                Variable var = currClass.getVar( id );
+                System.out.println( id + ": Redeclaration ( is already defined in " + var.i().beginLine + "," + var.i().beginColumn
                                     + " redeclared in " + n.i.beginLine + "," + n.i.beginColumn + ")" );
-                System.exit( -1 );
+                redeclarationCount++;
             }
         }
         else
@@ -159,10 +166,10 @@ public class BuildSymbolTableVisitor extends TypeDepthFirstVisitor
             {
                 System.out.println( id + " is already defined in "
                                     + currClass.getId() + "." + currMethod.getId() );
-                Variable var = currClass.getVar(id);
-                System.out.println( id + ": Redeclaration ( is already defined in " + var.i().beginLine + "," + var.i().beginColumn 
+                Variable var = currClass.getVar( id );
+                System.out.println( id + ": Redeclaration ( is already defined in " + var.i().beginLine + "," + var.i().beginColumn
                                     + " redeclared in " + n.i.beginLine + "," + n.i.beginColumn + ")" );
-                System.exit( -1 );
+                redeclarationCount++;
             }
         }
         return null;
