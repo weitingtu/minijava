@@ -1,8 +1,8 @@
-class Array
+class UnknownIdentifier
 {
     public static void main( String[] a )
     {
-        System.out.println( new Test().Start( 20 ) );
+        System.out.println( new Test().Start() );
     }
 }
 // This class contains an array of integers and
@@ -11,18 +11,17 @@ class Array
 
 class Test
 {
-    int [] number;
-    int i;
-    double [] doubles;
-    double d;
+    int size ;
 
     public int Start( int sz )
     {
-        number = new int[sz];
-        doubles = new double[sz];
+        int size;
+        return 0;
+    }
 
-        doubles[0] = true;
-
+    public int End( int sz )
+    {
+        int size;
         return 0;
     }
 }

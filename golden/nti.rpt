@@ -1,18 +1,18 @@
 Naming and Scoping nti
 nti 7, Local, int, TV::Start
-34,9: nti 7
+38,9: nti 7
 nti 37, Local, int, Tree::Compare
-132,9: nti 37
-134,27: nti 37
+149,9: nti 37
+151,29: nti 37
 nti 82, Local, int, Tree::accept
-323,9: nti 82
+382,9: nti 82
 nti 88, Local, int, Visitor::visit
-340,13: nti 88
-341,14: nti 88
-345,13: nti 88
-346,14: nti 88
+402,13: nti 88
+404,16: nti 88
+409,13: nti 88
+411,16: nti 88
 nti 92, Local, int, MyVisitor::visit
-361,13: nti 92
-362,14: nti 92
-368,13: nti 92
-369,14: nti 92
+429,13: nti 92
+431,16: nti 92
+438,13: nti 92
+440,16: nti 92

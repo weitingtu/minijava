@@ -1,14 +1,19 @@
-class LessThan {
-    public static void main(String[] a){
-	System.out.println(new Test().Start());
+class LessThan
+{
+    public static void main( String[] a )
+    {
+        System.out.println( new Test().Start() );
     }
 }
 
-class Test {
-    public int Start(){
+class Test
+{
+    public int Start()
+    {
         double a;
         int b;
-        if(a < b) {
+        if ( a < b )
+        {
         }
         else
         {

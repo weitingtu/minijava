@@ -52,8 +52,11 @@ test_task1:
     echo "Check Unknown identifier "; \
 	(java Main task1 < input/UnknownIdentifier.java > UnknownIdentifier.rpt ; diff UnknownIdentifier.rpt golden/UnknownIdentifier.rpt) && ( echo "Passed"; ) ; \
     echo "Check Redeclaration of an identifier "; \
-	(java Main task1 < input/Redeclaration.java > Redeclaration.rpt ; diff Redeclaration.rpt golden/Redeclaration.rpt) && ( echo "Passed"; ) ;
+	(java Main task1 < input/Redeclaration.java > Redeclaration.rpt ; diff Redeclaration.rpt golden/Redeclaration.rpt) && ( echo "Passed"; ) ; \
+    echo "Check identifier in different scope"; \
+	(java Main task1 < input/IdDifferentScope.java > IdDifferentScope.rpt ; diff IdDifferentScope.rpt golden/IdDifferentScope.rpt) && ( echo "Passed"; ) ; 
 	java Main < input/Double.java && (echo "Passed"; )
+	java Main < input/Foo.java && (echo "Passed"; )
 
 test_task2:
 	java Main < input/LessThanIfBooleanInt.java || (echo "Catched"; )
