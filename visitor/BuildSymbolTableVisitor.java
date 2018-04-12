@@ -86,7 +86,7 @@ public class BuildSymbolTableVisitor extends TypeDepthFirstVisitor
 
             System.out.println( "Class " +  n.i.toString()
                                 + "is already defined" );
-            System.exit( -1 );
+            return null;
         }
 
         // Entering a new class scope (no need to explicitly leave a class scope)
@@ -116,7 +116,7 @@ public class BuildSymbolTableVisitor extends TypeDepthFirstVisitor
         {
             System.out.println( "Class " +  n.i.toString()
                                 + "is already defined" );
-            System.exit( -1 );
+            return null;
         }
 
         // Entering a new class scope (no need to explicitly leave a class scope)

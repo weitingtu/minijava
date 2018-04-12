@@ -27,3 +27,7 @@ class Test
         return 0;
     }
 }
+
+class Test
+{
+}
