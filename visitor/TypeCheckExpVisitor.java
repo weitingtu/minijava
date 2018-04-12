@@ -146,6 +146,14 @@ public class TypeCheckExpVisitor extends TypeDepthFirstVisitor
 
         Method calledMethod = TypeCheckVisitor.symbolTable.getMethod( mname, cname );
 
+        if ( n.el.size() != calledMethod.params.size() )
+        {
+            System.out.println( "Argument number mismatch "
+                                + "( " + n.el.size() + " != " + calledMethod.params.size()
+                                + " ) Type Error in arguments passed to " + cname + "." + mname );
+            System.exit( -1 );
+        }
+
         for ( int i = 0; i < n.el.size(); i++ )
         {
             Type t1 = null;

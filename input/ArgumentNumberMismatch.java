@@ -2,33 +2,27 @@ class Redeclaration
 {
     public static void main( String[] a )
     {
-        System.out.println( new Test().Start() );
+        System.out.println( new foo().Start() );
     }
 }
 // This class contains an array of integers and
 // methods to initialize, print and search the array
 // using Binary Search
 
-class Test
+class foo
 {
-    int size ;
-    int size ;
-    int size ;
-    int size ;
-    int size ;
-
     public int Start( int sz )
     {
         return 0;
     }
 
-    public int End( int sz, double sz )
+    public int foo( int sz )
     {
+        int foo;
+
+        foo bar;          // refer to class main
+        foo = this.foo(); // refer to method
+        foo = foo + foo;  // refer to variable
         return 0;
     }
 }
-
-class Test
-{
-}
-
