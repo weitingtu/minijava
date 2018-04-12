@@ -585,7 +585,11 @@ class Method
     // Return false if there is a name conflict
     public boolean addVar( Identifier id, int idRef, Type type )
     {
-        if ( vars.containsKey( id.s ) )
+        if ( containsParam(id.s) )
+        {
+            return false;
+        }
+        else if ( vars.containsKey( id.s ) )
         {
             return false;
         }

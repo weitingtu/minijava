@@ -56,6 +56,7 @@ test_task1:
     echo "Check identifier in different scope"; \
 	(java Main task1 < input/IdDifferentScope.java > IdDifferentScope.rpt ; diff IdDifferentScope.rpt golden/IdDifferentScope.rpt) && ( echo "Passed"; ) ; 
 	(java Main task1 < input/Foo1.java > Foo1.rpt ; diff Foo1.rpt golden/Foo1.rpt) && ( echo "Passed"; ) ; 
+	(java Main task1 < input/MethodParamsVarsCheck.java > MethodParamsVarsCheck.rpt ; diff MethodParamsVarsCheck.rpt golden/MethodParamsVarsCheck.rpt) && ( echo "Passed"; ) ; 
 	java Main < input/Double.java && (echo "Passed"; )
 	java Main < input/Foo.java && (echo "Passed"; )
 

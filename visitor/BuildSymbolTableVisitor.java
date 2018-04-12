@@ -166,7 +166,11 @@ public class BuildSymbolTableVisitor extends TypeDepthFirstVisitor
             {
                 System.out.println( id + " is already defined in "
                                     + currClass.getId() + "." + currMethod.getId() );
-                Variable var = currClass.getVar( id );
+                Variable var = currMethod.getVar( id );
+                if ( null == var ) 
+                {
+                    var = currMethod.getParam( id );
+                }
                 System.out.println( id + ": Redeclaration ( is already defined in " + var.i().beginLine + "," + var.i().beginColumn
                                     + " redeclared in " + n.i.beginLine + "," + n.i.beginColumn + ")" );
                 redeclarationCount++;
