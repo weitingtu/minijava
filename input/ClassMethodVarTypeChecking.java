@@ -16,13 +16,13 @@ class foo
         return 0;
     }
 
-    public int foo( int sz )
+    public int foo()
     {
         int foo;
 
-        foo bar;            // refer to class main
-        foo = this.foo();   // refer to method
-        foo = foo + foo;    // refer to variable
+        foo bar;          // refer to class main
+        foo = this.foo(); // refer to method
+        foo = foo + foo;  // refer to variable
         return 0;
     }
 }

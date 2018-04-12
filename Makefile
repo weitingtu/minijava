@@ -60,14 +60,19 @@ test_task1:
 	java Main < input/Foo.java && (echo "Passed"; )
 
 test_task2:
-	java Main < input/LessThanIfBooleanInt.java || (echo "Catched"; )
-	java Main < input/LessThanIfDoubleInt.java && (echo "Passed"; )
-	java Main < input/PlusIntDouble.java && (echo "Passed"; )
-	java Main < input/MinusIntDouble.java && (echo "Passed"; )
-	java Main < input/TimesIntDouble.java && (echo "Passed"; )
-	java Main < input/Array.java && (echo "Passed"; )
-	java Main < input/AssignDoubleArrayBoolean.java || (echo "Catched"; )
-	java Main < input/ArgumentNumberMismatch.java || (echo "Catched"; )
+	rm -f task2.rpt;
+	java Main < input/LessThanIfBooleanInt.java || (echo "LessThanIfBooleanInt.java Catched" > task2.rpt; )
+	java Main < input/LessThanIfDoubleInt.java && (echo "LessThanIfDoubleInt Passed" >> task2.rpt; )
+	java Main < input/PlusIntDouble.java && (echo "PlusIntDouble Passed">> task2.rpt; )
+	java Main < input/MinusIntDouble.java && (echo "MinusIntDouble Passed" >> task2.rpt; )
+	java Main < input/TimesIntDouble.java && (echo "TimesIntDouble Passed" >> task2.rpt; )
+	java Main < input/Array.java && (echo "Array Passed" >> task2.rpt; )
+	java Main < input/AssignDoubleArrayBoolean.java || (echo "AssignDoubleArrayBoolean Catched" >> task2.rpt; )
+	java Main < input/ArgumentNumberMismatch.java || (echo "ArgumentNumberMismatch Catched" >> task2.rpt; )
+	java Main < input/ReturnTypeMismatch.java || (echo "ReturnTypeMismatch Catched" >> task2.rpt; )
+	java Main < input/ClassMethodVarTypeChecking.java && (echo "ClassMethodVarTypeChecking Passed" >> task2.rpt; )
+	@cat task2.rpt;
+	@diff task2.rpt golden/task2.rpt && ( echo "Passed"; );
 
 pretty_test1:
 	java Main2 < input/Factorial.java

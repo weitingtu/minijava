@@ -1,0 +1,10 @@
+LessThanIfBooleanInt.java Catched
+LessThanIfDoubleInt Passed
+PlusIntDouble Passed
+MinusIntDouble Passed
+TimesIntDouble Passed
+Array Passed
+AssignDoubleArrayBoolean Catched
+ArgumentNumberMismatch Catched
+ReturnTypeMismatch Catched
+ClassMethodVarTypeChecking Passed
