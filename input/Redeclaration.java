@@ -21,4 +21,9 @@ class Test
     {
         return 0;
     }
+
+    public int End( int sz, double sz )
+    {
+        return 0;
+    }
 }

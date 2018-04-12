@@ -6,4 +6,6 @@ size is already defined in Test
 size: Redeclaration ( is already defined in 14,9 redeclared in 17,9)
 size is already defined in Test
 size: Redeclaration ( is already defined in 14,9 redeclared in 18,9)
+Formal szis already defined in Test.End
+sz: Redeclaration ( is already defined in 25,25 redeclared in 25,36)
 Syntax error

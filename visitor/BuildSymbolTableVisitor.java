@@ -231,10 +231,12 @@ public class BuildSymbolTableVisitor extends TypeDepthFirstVisitor
 
         if ( !currMethod.addParam( n.i, currIdRef++, t ) )
         {
-            System.out.println( "Formal" + id + "is already defined in "
+            System.out.println( "Formal " + id + "is already defined in "
                                 + currClass.getId() + "." +
                                 currMethod.getId() );
-            System.exit( -1 );
+            Variable var = currMethod.getParam( id );
+            System.out.println( id + ": Redeclaration ( is already defined in " + var.i().beginLine + "," + var.i().beginColumn
+                                    + " redeclared in " + n.i.beginLine + "," + n.i.beginColumn + ")" );
         }
         return null;
     }
