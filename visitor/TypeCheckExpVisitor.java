@@ -1,5 +1,6 @@
 package visitor;
 import syntaxtree.*;
+import java.util.Vector;
 
 public class TypeCheckExpVisitor extends TypeDepthFirstVisitor
 {
@@ -144,7 +145,10 @@ public class TypeCheckExpVisitor extends TypeDepthFirstVisitor
         String mname = n.i.toString();
         String cname = ( ( IdentifierType ) n.e.accept( this ) ).s;
 
-        Method calledMethod = TypeCheckVisitor.symbolTable.getMethod( mname, cname );
+        //Method calledMethod = TypeCheckVisitor.symbolTable.getMethod( mname, cname );
+        Vector<Method> methods = TypeCheckVisitor.symbolTable.getMethod( mname, cname );
+
+        /*Method calledMethod = methods.elementAt(0);
 
         if ( n.el.size() != calledMethod.params.size() )
         {
@@ -172,7 +176,48 @@ public class TypeCheckExpVisitor extends TypeDepthFirstVisitor
             }
         }
 
-        return TypeCheckVisitor.symbolTable.getMethodType( mname, cname );
+        //return TypeCheckVisitor.symbolTable.getMethodType( mname, cname );
+        return calledMethod.type();
+        */
+        Method calledMethod = null;
+        for ( int j = 0; j < methods.size(); j++ )
+        {
+            calledMethod = methods.elementAt( j );
+
+            if ( n.el.size() != calledMethod.params.size() )
+            {
+                calledMethod = null;
+                continue;
+            }
+
+            for ( int i = 0; i < n.el.size(); i++ )
+            {
+                Type t1 = null;
+                Type t2 = null;
+
+                if ( calledMethod.getParamAt( i ) != null )
+                {
+                    t1 = calledMethod.getParamAt( i ).type();
+                }
+                t2 = n.el.elementAt( i ).accept( this );
+                if ( !TypeCheckVisitor.symbolTable.compareTypes( t1, t2 ) )
+                {
+                    calledMethod = null;
+                    break;
+                }
+            }
+            if ( null != calledMethod )
+            {
+                break;
+            }
+        }
+        if ( null == calledMethod )
+        {
+            System.out.println( "Type Error in arguments passed to " +
+                                cname + "." + mname );
+            System.exit( -1 );
+        }
+        return calledMethod.type();
     }
 
     // int i;

@@ -8,3 +8,4 @@ AssignDoubleArrayBoolean Catched
 ArgumentNumberMismatch Catched
 ReturnTypeMismatch Catched
 ClassMethodVarTypeChecking Passed
+Extend Passed

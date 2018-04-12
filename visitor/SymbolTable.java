@@ -1,8 +1,45 @@
 package visitor;
 import syntaxtree.*;
 import java.util.Hashtable;
+import java.util.Set;
+import java.util.Iterator;
 import java.util.Enumeration;
 import java.util.Vector;
+import java.lang.Object;
+
+enum TypeEnum
+{
+    INT_ARRAY, DOUBLE_ARRAY, BOOLEAN, INTEGER, DOUBLE, IDENTIFIER;
+    static public TypeEnum getTypeEnum( Type t )
+    {
+        if ( t instanceof IntArrayType )
+        {
+            return TypeEnum.INT_ARRAY;
+        }
+        if ( t instanceof DoubleArrayType )
+        {
+            return TypeEnum.DOUBLE_ARRAY;
+        }
+        if ( t instanceof BooleanType )
+        {
+            return TypeEnum.BOOLEAN;
+        }
+        if ( t instanceof IntegerType )
+        {
+            return TypeEnum.INTEGER;
+        }
+        if ( t instanceof DoubleType )
+        {
+            return TypeEnum.DOUBLE;
+        }
+        if ( t instanceof IdentifierType )
+        {
+            return TypeEnum.IDENTIFIER;
+        }
+        System.exit( -1 ); // Panic!
+        return TypeEnum.INT_ARRAY;
+    }
+}
 
 // The global Symbol Table that maps class name to Class
 class SymbolTable
@@ -98,7 +135,7 @@ class SymbolTable
 
     // Return the declared method defined in the class named "cName"
     // (or in one of its ancestors)
-    public Method getMethod( String id, String cName )
+    /*public Method getMethod( String id, String cName )
     {
         Class c = getClass( cName );
 
@@ -129,10 +166,53 @@ class SymbolTable
 
         System.exit( -1 );
         return null;
+    }*/
+
+    public Vector<Method> getMethod( String id, String cName )
+    {
+        Vector<Method> results = new Vector<Method>();
+        Class c = getClass( cName );
+
+        if ( c == null )
+        {
+            System.out.println( "Class " + cName + " not defined" );
+            System.exit( -1 ); // Panic!
+        }
+
+        // Try to find the declared method along the class hierarchy
+        while ( c != null )
+        {
+            Set<MethodDef> keys = c.methoddefs.keySet();
+            Iterator<MethodDef> itr = keys.iterator();
+            while ( itr.hasNext() )
+            {
+                MethodDef md = itr.next();
+                if ( md.id.equals( id ) )
+                {
+                    results.addElement( c.methoddefs.get( md ) );
+                }
+            }
+            if ( c.parent() == null )
+            {
+                c = null;
+            }
+            else
+            {
+                c = getClass( c.parent() );
+            }
+        }
+
+        if ( results.size() == 0 )
+        {
+            System.out.println( "Method " + id + " not defined in class " + cName );
+
+            System.exit( -1 );
+        }
+        return results;
     }
 
     // Get the return type of a method declared in a class named "classCope"
-    public Type getMethodType( String id, String cName )
+    /*public Type getMethodType( String id, String cName )
     {
         Method m = getMethod( id, cName );
         if ( m != null )
@@ -141,7 +221,7 @@ class SymbolTable
         }
 
         return null;
-    }
+    }*/
 
     // Utility method to check if t1 is compatible with t2
     // or if t1 is a subclass of t2
@@ -217,6 +297,7 @@ class Class
     String id;      // Class name
     int idRef;
     Hashtable<String, Method> methods;
+    Hashtable<MethodDef, Method> methoddefs;
     Hashtable<String, Variable> fields;
     String parent;  // Superclass's name  (null if there is no superclass)
     Type type;      // An instance of Type that represents this class
@@ -230,6 +311,7 @@ class Class
         parent = p;
         type = new IdentifierType( id );
         methods = new Hashtable<String, Method>();
+        methoddefs = new Hashtable<MethodDef, Method>();
         fields = new Hashtable<String, Variable>();
     }
 
@@ -241,13 +323,23 @@ class Class
 
     public Type type() { return type; }
 
+    public TypeEnum getEnumType( Type t )
+    {
+        //if ( t instanceof IntArrayType )
+        {
+            return TypeEnum.INT_ARRAY;
+        }
+        //ARRAY, DOUBLE_ARRAY, BOOLEAN, INTEGER, DOUBLE, IDENTIFIER;
+
+    }
+
     // Add a method defined in the current class by registering
     // its name along with its return type.
     // The other properties (parameters, local variables) of the method
     // will be added later
     //
     // Return false if there is a name conflict (among all method names only)
-    public boolean addMethod( String id, int idRef, Type type )
+    /*public boolean addMethod( String id, int idRef, Type type )
     {
         if ( containsMethod( id ) )
         {
@@ -258,20 +350,58 @@ class Class
             methods.put( id, new Method( id, idRef, type ) );
             return true;
         }
+    }*/
+
+    public boolean addMethod( String id, int idRef, Type type, FormalList fl )
+    {
+        Vector<TypeEnum> params = new Vector<TypeEnum>();
+        for ( int i = 0; i < fl.size(); i++ )
+        {
+            params.addElement( TypeEnum.getTypeEnum( fl.elementAt( i ).t ) );
+        }
+
+        if ( containsMethod( id, params ) )
+        {
+            return false;
+        }
+        else
+        {
+            methods.put( id, new Method( id, idRef, type ) );
+            methoddefs.put( new MethodDef( id, params ), new Method( id, idRef, type ) );
+            return true;
+        }
     }
 
     // Enumeration of method names
-    public Enumeration getMethods()
+    /*public Enumeration getMethods()
     {
         return methods.keys();
-    }
+    }*/
 
     // Return the method representation for the specified method
-    public Method getMethod( String id )
+    /*public Method getMethod( String id )
     {
         if ( containsMethod( id ) )
         {
             return ( Method )methods.get( id );
+        }
+        else
+        {
+            return null;
+        }
+    }*/
+
+    public Method getMethod( String id, FormalList fl )
+    {
+        Vector<TypeEnum> params = new Vector<TypeEnum>();
+        for ( int i = 0; i < fl.size(); i++ )
+        {
+            params.addElement( TypeEnum.getTypeEnum( fl.elementAt( i ).t ) );
+        }
+
+        if ( containsMethod( id, params ) )
+        {
+            return ( Method )methoddefs.get( new  MethodDef( id, params ) );
         }
         else
         {
@@ -312,9 +442,14 @@ class Class
         return fields.containsKey( id );
     }
 
-    public boolean containsMethod( String id )
+    /*public boolean containsMethod( String id )
     {
         return methods.containsKey( id );
+    }*/
+
+    public boolean containsMethod( String id, Vector<TypeEnum> params )
+    {
+        return methoddefs.containsKey( new MethodDef( id, params )  );
     }
 
     public String parent()
@@ -349,6 +484,46 @@ class Variable
 } // Variable
 
 // Store all properties that describe a variable
+class MethodDef
+{
+    String id;  // Method name
+    Vector<TypeEnum> params;          // Formal parameters
+
+    public MethodDef( String id, Vector<TypeEnum> params )
+    {
+        this.id = id;
+        this.params = params;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        //System.out.println( "hash code " +id + " " + id.hashCode() + " " +params+ " " +params.hashCode() );
+        //return id.hashCode() + params.hashCode();
+        return id.hashCode();
+    }
+
+    @Override
+    public boolean equals( Object obj )
+    {
+        if ( this == obj )
+        {
+            return true;
+        }
+        if ( obj == null )
+        {
+            return false;
+        }
+        if ( getClass() != obj.getClass() )
+        {
+            return false;
+        }
+        MethodDef other = ( MethodDef ) obj;
+        return id.equals( other.id ) && params.equals( other.params );
+    }
+
+}
+
 class Method
 {
 

@@ -188,7 +188,8 @@ public class BuildSymbolTableVisitor extends TypeDepthFirstVisitor
         Type t = n.t.accept( this );
         String id = n.i.toString();
 
-        if ( !currClass.addMethod( id, currIdRef++, t ) )
+        //if ( !currClass.addMethod( id, currIdRef++, t ) )
+        if ( !currClass.addMethod( id, currIdRef++, t, n.fl ) )
         {
             System.out.println( "Method " + id
                                 + " is already defined in "
@@ -197,7 +198,8 @@ public class BuildSymbolTableVisitor extends TypeDepthFirstVisitor
         }
 
         // Entering a method scope
-        currMethod = currClass.getMethod( id );
+        //currMethod = currClass.getMethod( id );
+        currMethod = currClass.getMethod( id, n.fl );
 
         for ( int i = 0; i < n.fl.size(); i++ )
         {

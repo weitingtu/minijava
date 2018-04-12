@@ -110,7 +110,8 @@ public class SymbolUsageVisitor extends DepthFirstVisitor
     {
         n.t.accept( this );
         String id = n.i.toString();
-        currMethod = currClass.getMethod( id );
+        //currMethod = currClass.getMethod( id );
+        currMethod = currClass.getMethod( id, n.fl );
         if ( target.equals( id ) )
         {
             print( currMethod, currClass );

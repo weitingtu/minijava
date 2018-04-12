@@ -71,6 +71,7 @@ test_task2:
 	java Main < input/ArgumentNumberMismatch.java || (echo "ArgumentNumberMismatch Catched" >> task2.rpt; )
 	java Main < input/ReturnTypeMismatch.java || (echo "ReturnTypeMismatch Catched" >> task2.rpt; )
 	java Main < input/ClassMethodVarTypeChecking.java && (echo "ClassMethodVarTypeChecking Passed" >> task2.rpt; )
+	java Main < input/Extend.java && (echo "Extend Passed" >> task2.rpt; )
 	@cat task2.rpt;
 	@diff task2.rpt golden/task2.rpt && ( echo "Passed"; );
 
