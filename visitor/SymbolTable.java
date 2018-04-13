@@ -362,6 +362,7 @@ class Class
 
         if ( containsMethod( id, params ) )
         {
+            //System.out.println( "Method " + id + " is already defined in class " + this.id );
             return false;
         }
         else
