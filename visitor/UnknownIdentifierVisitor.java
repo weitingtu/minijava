@@ -83,7 +83,6 @@ public class UnknownIdentifierVisitor extends DepthFirstVisitor
     {
         n.t.accept( this );
         String id = n.i.toString();
-        //currMethod = currClass.getMethod( id );
         currMethod = currClass.getMethod( id, n.fl );
         /*for ( int i = 0; i < n.fl.size(); i++ )
         {

@@ -152,7 +152,6 @@ public class BuildSymbolTableVisitor extends TypeDepthFirstVisitor
             {
                 System.out.println( id + " is already defined in "
                                     + currClass.getId() );
-                // <Identifier’s value>: Redeclaration (<Location of the 1st declaration of the identifier> and <Location of the redeclared identifier>)
                 Variable var = currClass.getVar( id );
                 System.out.println( id + ": Redeclaration ( is already defined in " + var.i().beginLine + "," + var.i().beginColumn
                                     + " redeclared in " + n.i.beginLine + "," + n.i.beginColumn + ")" );
@@ -196,7 +195,6 @@ public class BuildSymbolTableVisitor extends TypeDepthFirstVisitor
         {
             System.exit( -1 );
         }
-        //if ( !currClass.addMethod( id, currIdRef++, t ) )
         if ( !currClass.addMethod( id, currClass.getId(), currIdRef++, t, n.fl ) )
         {
             System.out.println( "Method " + id
@@ -206,7 +204,6 @@ public class BuildSymbolTableVisitor extends TypeDepthFirstVisitor
         }
 
         // Entering a method scope
-        //currMethod = currClass.getMethod( id );
         currMethod = currClass.getMethod( id, n.fl );
 
         for ( int i = 0; i < n.fl.size(); i++ )

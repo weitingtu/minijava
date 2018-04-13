@@ -135,39 +135,6 @@ class SymbolTable
 
     // Return the declared method defined in the class named "cName"
     // (or in one of its ancestors)
-    /*public Method getMethod( String id, String cName )
-    {
-        Class c = getClass( cName );
-
-        if ( c == null )
-        {
-            System.out.println( "Class " + cName + " not defined" );
-            System.exit( -1 ); // Panic!
-        }
-
-        // Try to find the declared method along the class hierarchy
-        while ( c != null )
-        {
-            if ( c.getMethod( id ) != null )
-            {
-                return c.getMethod( id ); // Found!
-            }
-            else if ( c.parent() == null )
-            {
-                c = null;
-            }
-            else
-            {
-                c = getClass( c.parent() );
-            }
-        }
-
-        System.out.println( "Method " + id + " not defined in class " + cName );
-
-        System.exit( -1 );
-        return null;
-    }*/
-
     public Vector<Method> getMethod( String id, String cName )
     {
         Vector<Method> results = new Vector<Method>();
@@ -256,27 +223,9 @@ class SymbolTable
             }
         }
 
-        //else
-        //{
-            //methods.put( id, new Method( id, cName, idRef, type ) );
-           // methoddefs.put( new MethodDef( id, params ), new Method( id, cName, idRef, type ) );
-            //return true;
-        //}
         return true;
     }
 
-
-    // Get the return type of a method declared in a class named "classCope"
-    /*public Type getMethodType( String id, String cName )
-    {
-        Method m = getMethod( id, cName );
-        if ( m != null )
-        {
-            return m.type();
-        }
-
-        return null;
-    }*/
 
     // Utility method to check if t1 is compatible with t2
     // or if t1 is a subclass of t2
@@ -394,19 +343,6 @@ class Class
     // will be added later
     //
     // Return false if there is a name conflict (among all method names only)
-    /*public boolean addMethod( String id, int idRef, Type type )
-    {
-        if ( containsMethod( id ) )
-        {
-            return false;
-        }
-        else
-        {
-            methods.put( id, new Method( id, idRef, type ) );
-            return true;
-        }
-    }*/
-
     public boolean addMethod( String id, String cName, int idRef, Type type, FormalList fl )
     {
         Vector<TypeEnum> params = new Vector<TypeEnum>();
@@ -427,25 +363,6 @@ class Class
             return true;
         }
     }
-
-    // Enumeration of method names
-    /*public Enumeration getMethods()
-    {
-        return methods.keys();
-    }*/
-
-    // Return the method representation for the specified method
-    /*public Method getMethod( String id )
-    {
-        if ( containsMethod( id ) )
-        {
-            return ( Method )methods.get( id );
-        }
-        else
-        {
-            return null;
-        }
-    }*/
 
     public Method getMethod( String id, FormalList fl )
     {
@@ -497,11 +414,6 @@ class Class
     {
         return fields.containsKey( id );
     }
-
-    /*public boolean containsMethod( String id )
-    {
-        return methods.containsKey( id );
-    }*/
 
     public boolean containsMethod( String id, Vector<TypeEnum> params )
     {

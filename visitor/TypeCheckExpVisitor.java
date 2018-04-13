@@ -145,40 +145,8 @@ public class TypeCheckExpVisitor extends TypeDepthFirstVisitor
         String mname = n.i.toString();
         String cname = ( ( IdentifierType ) n.e.accept( this ) ).s;
 
-        //Method calledMethod = TypeCheckVisitor.symbolTable.getMethod( mname, cname );
         Vector<Method> methods = TypeCheckVisitor.symbolTable.getMethod( mname, cname );
 
-        /*Method calledMethod = methods.elementAt(0);
-
-        if ( n.el.size() != calledMethod.params.size() )
-        {
-            System.out.println( "Argument number mismatch "
-                                + "( " + n.el.size() + " != " + calledMethod.params.size()
-                                + " ) Type Error in arguments passed to " + cname + "." + mname );
-            System.exit( -1 );
-        }
-
-        for ( int i = 0; i < n.el.size(); i++ )
-        {
-            Type t1 = null;
-            Type t2 = null;
-
-            if ( calledMethod.getParamAt( i ) != null )
-            {
-                t1 = calledMethod.getParamAt( i ).type();
-            }
-            t2 = n.el.elementAt( i ).accept( this );
-            if ( !TypeCheckVisitor.symbolTable.compareTypes( t1, t2 ) )
-            {
-                System.out.println( "Type Error in arguments passed to " +
-                                    cname + "." + mname );
-                System.exit( -1 );
-            }
-        }
-
-        //return TypeCheckVisitor.symbolTable.getMethodType( mname, cname );
-        return calledMethod.type();
-        */
         Method calledMethod = null;
         for ( int j = 0; j < methods.size(); j++ )
         {
