@@ -62,6 +62,7 @@ test_task1:
 	(java Main task1 < input/Foo1.java > Foo1.rpt ; diff Foo1.rpt golden/Foo1.rpt) && ( echo "Passed"; ) ; 
 	(java Main task1 < input/MethodParamsVarsCheck.java > MethodParamsVarsCheck.rpt ; diff MethodParamsVarsCheck.rpt golden/MethodParamsVarsCheck.rpt) && ( echo "Passed"; ) ; 
 	(java Main task1 < input/FunctionRedefined.java > FunctionRedefined.rpt ; diff FunctionRedefined.rpt golden/FunctionRedefined.rpt) && ( echo "Passed"; ) ; 
+	(java Main task1 < input/ExtendingUndefinedClass.java > ExtendingUndefinedClass.rpt ; diff ExtendingUndefinedClass.rpt golden/ExtendingUndefinedClass.rpt) && ( echo "Passed"; ) ; 
 	java Main < input/Double.java && (echo "Passed"; )
 	java Main < input/Foo.java && (echo "Passed"; )
 
