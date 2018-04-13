@@ -1,14 +1,14 @@
-LessThanIfBooleanInt Catched
 LessThanIfDoubleInt Passed
 PlusIntDouble Passed
 MinusIntDouble Passed
 TimesIntDouble Passed
 Array Passed
+ClassMethodVarTypeChecking Passed
+Extend Passed
+LessThanIfBooleanInt Catched
 AssignDoubleArrayBoolean Catched
 ArgumentNumberMismatch Catched
 ReturnTypeMismatch Catched
-ClassMethodVarTypeChecking Passed
-Extend Passed
 OverridingError Catched
 OverloadingError Catched
 OverloadingMethodsIntDouble Catched

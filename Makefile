@@ -52,37 +52,22 @@ test_task1:
 	@for p in MyVisitor Visitor nti visit Start v_key ifound ; do \
         echo "Check $$p usage "; \
     	(java Main $$p < input/TreeVisitor.java > $$p.rpt ; diff $$p.rpt golden/$$p.rpt) && ( echo "Passed"; ) ; \
-	done; \
-    echo "Check Unknown identifier "; \
-	(java Main task1 < input/UnknownIdentifier.java > UnknownIdentifier.rpt ; diff UnknownIdentifier.rpt golden/UnknownIdentifier.rpt) && ( echo "Passed"; ) ; \
-    echo "Check Redeclaration of an identifier "; \
-	(java Main task1 < input/Redeclaration.java > Redeclaration.rpt ; diff Redeclaration.rpt golden/Redeclaration.rpt) && ( echo "Passed"; ) ; \
-    echo "Check identifier in different scope"; \
-	(java Main task1 < input/IdDifferentScope.java > IdDifferentScope.rpt ; diff IdDifferentScope.rpt golden/IdDifferentScope.rpt) && ( echo "Passed"; ) ; 
-	(java Main task1 < input/Foo1.java > Foo1.rpt ; diff Foo1.rpt golden/Foo1.rpt) && ( echo "Passed"; ) ; 
-	(java Main task1 < input/MethodParamsVarsCheck.java > MethodParamsVarsCheck.rpt ; diff MethodParamsVarsCheck.rpt golden/MethodParamsVarsCheck.rpt) && ( echo "Passed"; ) ; 
-	(java Main task1 < input/FunctionRedefined.java > FunctionRedefined.rpt ; diff FunctionRedefined.rpt golden/FunctionRedefined.rpt) && ( echo "Passed"; ) ; 
-	(java Main task1 < input/ExtendingUndefinedClass.java > ExtendingUndefinedClass.rpt ; diff ExtendingUndefinedClass.rpt golden/ExtendingUndefinedClass.rpt) && ( echo "Passed"; ) ; 
-	java Main < input/Double.java && (echo "Passed"; )
-	java Main < input/Foo.java && (echo "Passed"; )
+	done; 
+	@for p in UnknownIdentifier Redeclaration IdDifferentScope Foo1 MethodParamsVarsCheck FunctionRedefined ExtendingUndefinedClass ; do \
+	    (java Main task1 < input/$$p.java > $$p.rpt ; diff $$p.rpt golden/$$p.rpt) && ( echo "$$p Passed"; ) ; \
+	done; 
+	@for p in Double Foo ; do \
+	    java Main < input/$$p.java && (echo "$$p Passed"; ) ; \
+	done; 
 
 test_task2:
 	rm -f task2.rpt;
-	java Main < input/LessThanIfBooleanInt.java || (echo "LessThanIfBooleanInt Catched" > task2.rpt; )
-	java Main < input/LessThanIfDoubleInt.java && (echo "LessThanIfDoubleInt Passed" >> task2.rpt; )
-	java Main < input/PlusIntDouble.java && (echo "PlusIntDouble Passed">> task2.rpt; )
-	java Main < input/MinusIntDouble.java && (echo "MinusIntDouble Passed" >> task2.rpt; )
-	java Main < input/TimesIntDouble.java && (echo "TimesIntDouble Passed" >> task2.rpt; )
-	java Main < input/Array.java && (echo "Array Passed" >> task2.rpt; )
-	java Main < input/AssignDoubleArrayBoolean.java || (echo "AssignDoubleArrayBoolean Catched" >> task2.rpt; )
-	java Main < input/ArgumentNumberMismatch.java || (echo "ArgumentNumberMismatch Catched" >> task2.rpt; )
-	java Main < input/ReturnTypeMismatch.java || (echo "ReturnTypeMismatch Catched" >> task2.rpt; )
-	java Main < input/ClassMethodVarTypeChecking.java && (echo "ClassMethodVarTypeChecking Passed" >> task2.rpt; )
-	java Main < input/Extend.java && (echo "Extend Passed" >> task2.rpt; )
-	java Main < input/OverridingError.java || (echo "OverridingError Catched" >> task2.rpt; )
-	java Main < input/OverloadingError.java || (echo "OverloadingError Catched" >> task2.rpt; )
-	java Main < input/OverloadingMethodsIntDouble.java || (echo "OverloadingMethodsIntDouble Catched" >> task2.rpt; )
-	java Main < input/OverloadingMethodsIntBoolean.java || (echo "OverloadingMethodsIntBoolean Catched" >> task2.rpt; )
+	@for p in LessThanIfDoubleInt PlusIntDouble MinusIntDouble TimesIntDouble Array ClassMethodVarTypeChecking Extend ; do \
+	    (java Main < input/$$p.java && (echo "$$p Passed" >> task2.rpt; )) ; \
+	done; 
+	@for p in LessThanIfBooleanInt AssignDoubleArrayBoolean ArgumentNumberMismatch ReturnTypeMismatch OverridingError OverloadingError OverloadingMethodsIntDouble OverloadingMethodsIntBoolean ; do \
+	    (java Main < input/$$p.java || (echo "$$p Catched" >> task2.rpt; )) ; \
+	done; 
 	@cat task2.rpt;
 	@diff task2.rpt golden/task2.rpt && ( echo "Passed"; );
 
