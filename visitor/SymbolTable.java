@@ -205,7 +205,7 @@ class SymbolTable
             if ( c.containsMethod( id, params ) )
             {
                 Method m = c.getMethod( id, fl );
-                if ( !compareTypes( type, m.type() ) )
+                if ( type.getClass() != m.type().getClass()  )
                 {
                     System.out.println( "return type of " + cName + "::"  + id + " is not compatible with "
                                         + c.getId() + "::" + m.getId() );

@@ -11,3 +11,5 @@ ClassMethodVarTypeChecking Passed
 Extend Passed
 OverridingError Catched
 OverloadingError Catched
+OverloadingMethodsIntDouble Catched
+OverloadingMethodsIntBoolean Catched

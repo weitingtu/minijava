@@ -81,6 +81,8 @@ test_task2:
 	java Main < input/Extend.java && (echo "Extend Passed" >> task2.rpt; )
 	java Main < input/OverridingError.java || (echo "OverridingError Catched" >> task2.rpt; )
 	java Main < input/OverloadingError.java || (echo "OverloadingError Catched" >> task2.rpt; )
+	java Main < input/OverloadingMethodsIntDouble.java || (echo "OverloadingMethodsIntDouble Catched" >> task2.rpt; )
+	java Main < input/OverloadingMethodsIntBoolean.java || (echo "OverloadingMethodsIntBoolean Catched" >> task2.rpt; )
 	@cat task2.rpt;
 	@diff task2.rpt golden/task2.rpt && ( echo "Passed"; );
 
