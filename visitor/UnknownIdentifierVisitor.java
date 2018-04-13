@@ -60,7 +60,8 @@ public class UnknownIdentifierVisitor extends DepthFirstVisitor
         //n.j.accept( this );
         if ( !symbolTable.containsClass( n.j.toString() ) )
         {
-            System.out.println( n.j.toString() + ": Unknown identifier in ClassDeclExtends ( " + n.j.beginLine + "," + n.j.beginColumn + " )" );
+            System.out.println( n.j.toString() + ": Unknown identifier in ClassDeclExtends ( " + n.j.beginLine + "," +
+                                n.j.beginColumn + " )" );
             unknownIdCount++;
         }
         for ( int i = 0; i < n.vl.size(); i++ )

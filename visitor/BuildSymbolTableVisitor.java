@@ -166,7 +166,7 @@ public class BuildSymbolTableVisitor extends TypeDepthFirstVisitor
                 System.out.println( id + " is already defined in "
                                     + currClass.getId() + "." + currMethod.getId() );
                 Variable var = currMethod.getVar( id );
-                if ( null == var ) 
+                if ( null == var )
                 {
                     var = currMethod.getParam( id );
                 }

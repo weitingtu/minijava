@@ -204,11 +204,11 @@ class SymbolTable
         {
             if ( c.containsMethod( id, params ) )
             {
-                Method m = c.getMethod( id, fl);
+                Method m = c.getMethod( id, fl );
                 if ( !compareTypes( type, m.type() ) )
                 {
-                    System.out.println( "return type of " + cName + "::"  + id + " is not compatible with " 
-                             + c.getId() + "::" + m.getId() );
+                    System.out.println( "return type of " + cName + "::"  + id + " is not compatible with "
+                                        + c.getId() + "::" + m.getId() );
                     return false;
                 }
             }
@@ -555,7 +555,7 @@ class Method
     // Return false if there is a name conflict
     public boolean addVar( Identifier id, int idRef, Type type )
     {
-        if ( containsParam(id.s) )
+        if ( containsParam( id.s ) )
         {
             return false;
         }
