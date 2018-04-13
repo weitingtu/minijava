@@ -65,7 +65,7 @@ public class BuildSymbolTableVisitor extends TypeDepthFirstVisitor
 
         //this is an ugly hack.. but its not worth having a Void and
         //String[] type just for one occourance
-        currMethod = new Method ( "main", currIdRef++, new IdentifierType( "void" ) );
+        currMethod = new Method ( "main", currClass.getId(), currIdRef++, new IdentifierType( "void" ) );
         currMethod.addVar( n.i2,
                            currIdRef++,
                            new IdentifierType( "String[]" ) );
@@ -192,8 +192,12 @@ public class BuildSymbolTableVisitor extends TypeDepthFirstVisitor
         Type t = n.t.accept( this );
         String id = n.i.toString();
 
+        if ( !symbolTable.checkMethod( id, currClass.getId(), t, n.fl ) )
+        {
+            System.exit( -1 );
+        }
         //if ( !currClass.addMethod( id, currIdRef++, t ) )
-        if ( !currClass.addMethod( id, currIdRef++, t, n.fl ) )
+        if ( !currClass.addMethod( id, currClass.getId(), currIdRef++, t, n.fl ) )
         {
             System.out.println( "Method " + id
                                 + " is already defined in "

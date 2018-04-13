@@ -1,4 +1,4 @@
-LessThanIfBooleanInt.java Catched
+LessThanIfBooleanInt Catched
 LessThanIfDoubleInt Passed
 PlusIntDouble Passed
 MinusIntDouble Passed
@@ -9,3 +9,5 @@ ArgumentNumberMismatch Catched
 ReturnTypeMismatch Catched
 ClassMethodVarTypeChecking Passed
 Extend Passed
+OverridingError Catched
+OverloadingError Catched

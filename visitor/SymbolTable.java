@@ -211,6 +211,61 @@ class SymbolTable
         return results;
     }
 
+    public boolean checkMethod( String id, String cName, Type type, FormalList fl )
+    {
+        Vector<TypeEnum> params = new Vector<TypeEnum>();
+        for ( int i = 0; i < fl.size(); i++ )
+        {
+            params.addElement( TypeEnum.getTypeEnum( fl.elementAt( i ).t ) );
+        }
+
+        Class c = getClass( cName );
+
+        if ( c == null )
+        {
+            System.out.println( "Class " + cName + " not defined" );
+            System.exit( -1 ); // Panic!
+        }
+
+        if ( c.containsMethod( id, params ) )
+        {
+            System.out.println( "Method " + id + " is already defined in class " + cName );
+            return false;
+        }
+
+        while ( c != null )
+        {
+            if ( c.containsMethod( id, params ) )
+            {
+                Method m = c.getMethod( id, fl);
+                if ( !compareTypes( type, m.type() ) )
+                {
+                    System.out.println( "return type of " + cName + "::"  + id + " is not compatible with " 
+                             + c.getId() + "::" + m.getId() );
+                    return false;
+                }
+            }
+
+            if ( c.parent() == null )
+            {
+                c = null;
+            }
+            else
+            {
+                c = getClass( c.parent() );
+            }
+        }
+
+        //else
+        //{
+            //methods.put( id, new Method( id, cName, idRef, type ) );
+           // methoddefs.put( new MethodDef( id, params ), new Method( id, cName, idRef, type ) );
+            //return true;
+        //}
+        return true;
+    }
+
+
     // Get the return type of a method declared in a class named "classCope"
     /*public Type getMethodType( String id, String cName )
     {
@@ -352,7 +407,7 @@ class Class
         }
     }*/
 
-    public boolean addMethod( String id, int idRef, Type type, FormalList fl )
+    public boolean addMethod( String id, String cName, int idRef, Type type, FormalList fl )
     {
         Vector<TypeEnum> params = new Vector<TypeEnum>();
         for ( int i = 0; i < fl.size(); i++ )
@@ -367,8 +422,8 @@ class Class
         }
         else
         {
-            methods.put( id, new Method( id, idRef, type ) );
-            methoddefs.put( new MethodDef( id, params ), new Method( id, idRef, type ) );
+            methods.put( id, new Method( id, cName, idRef, type ) );
+            methoddefs.put( new MethodDef( id, params ), new Method( id, cName, idRef, type ) );
             return true;
         }
     }
@@ -529,14 +584,16 @@ class Method
 {
 
     String id;  // Method name
+    String cName;
     int idRef;
     Type type;  // Return type
     Vector<Variable> params;          // Formal parameters
     Hashtable<String, Variable> vars; // Local variables
 
-    public Method( String id, int idRef, Type type )
+    public Method( String id, String cladd_id, int idRef, Type type )
     {
         this.id = id;
+        this.cName = cName;
         this.idRef = idRef;
         this.type = type;
         params = new Vector<Variable>();

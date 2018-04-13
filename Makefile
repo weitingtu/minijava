@@ -17,6 +17,10 @@ VISITOR_CLASS = $(VISITOR:.java=.class)
 
 all: Main.class
 
+mini:
+	make clean;
+	make;
+
 Main.class: Main.java $(PARSER) 
 
 pretty: Main2.class
@@ -63,7 +67,7 @@ test_task1:
 
 test_task2:
 	rm -f task2.rpt;
-	java Main < input/LessThanIfBooleanInt.java || (echo "LessThanIfBooleanInt.java Catched" > task2.rpt; )
+	java Main < input/LessThanIfBooleanInt.java || (echo "LessThanIfBooleanInt Catched" > task2.rpt; )
 	java Main < input/LessThanIfDoubleInt.java && (echo "LessThanIfDoubleInt Passed" >> task2.rpt; )
 	java Main < input/PlusIntDouble.java && (echo "PlusIntDouble Passed">> task2.rpt; )
 	java Main < input/MinusIntDouble.java && (echo "MinusIntDouble Passed" >> task2.rpt; )
@@ -74,6 +78,8 @@ test_task2:
 	java Main < input/ReturnTypeMismatch.java || (echo "ReturnTypeMismatch Catched" >> task2.rpt; )
 	java Main < input/ClassMethodVarTypeChecking.java && (echo "ClassMethodVarTypeChecking Passed" >> task2.rpt; )
 	java Main < input/Extend.java && (echo "Extend Passed" >> task2.rpt; )
+	java Main < input/OverridingError.java || (echo "OverridingError Catched" >> task2.rpt; )
+	java Main < input/OverloadingError.java || (echo "OverloadingError Catched" >> task2.rpt; )
 	@cat task2.rpt;
 	@diff task2.rpt golden/task2.rpt && ( echo "Passed"; );
 
@@ -81,5 +87,5 @@ pretty_test1:
 	java Main2 < input/Factorial.java
 
 pretty_test2:
-	java Main2 < input/BinarySearch.java
+	java Main2 < inputBinarySearch.java
 

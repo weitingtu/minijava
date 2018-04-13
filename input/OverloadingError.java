@@ -69,7 +69,7 @@ class A extends B
     public int f( int x )    { return 0; } // #1
     public int f( double x ) { return 0; } // #2
     public int g( double x ) { return 0; } // #3
-    //public boolean h( int x ) { return true; } // #6 (Error: Have different return type
+    public boolean h( int x ) { return true; } // #6 (Error: Have different return type
     // against the overridden method in B)
     public int bar()
     {
