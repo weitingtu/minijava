@@ -1,5 +1,5 @@
 sz is already defined in Test.Start
-sz: Redeclaration ( is already defined in 16,26 redeclared in 18,13)
+sz: Redeclaration ( is already defined in 16,27 redeclared in 18,13)
 sz is already defined in Test3.Start
 sz: Redeclaration ( is already defined in 42,13 redeclared in 43,13)
 Syntax error
